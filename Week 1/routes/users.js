@@ -27,7 +27,7 @@ router
     dbo.getDb().then((db) => {
       db.collection("users").insertOne(req.body, function (err, result) {
         if (err) {
-          res.status(400).send("Error inserting all users!");
+          res.status(400).send("Error inserting all  users!");
         } else {
           console.log("id", result.insertedId);
 
