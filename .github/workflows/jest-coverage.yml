@@ -20,3 +20,7 @@ jobs:
             - uses: ArtiomTr/jest-coverage-report-action@v2
               with:
                 working-directory: Week 1/routes
+            - name: Install modules
+              run: npm
+            - name: Run ESLint
+              run: npm run lint . --ext .js,.jsx,.ts,.tsx
