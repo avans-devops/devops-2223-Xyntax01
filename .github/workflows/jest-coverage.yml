@@ -21,6 +21,8 @@ jobs:
               with:
                 working-directory: Week 1/routes
             - name: Install modules
-              run: npm
+              working-directory: Week 1/routes
+              run: npm ci
             - name: Run ESLint
-              run: npm run lint . --ext .js,.jsx,.ts,.tsx
+              working-directory: Week 1/routes
+              run: npm run lint
