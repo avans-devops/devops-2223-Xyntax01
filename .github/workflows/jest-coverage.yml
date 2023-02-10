@@ -5,7 +5,7 @@ on:
             - master
             - main
         paths:
-            - Week 1/api/**
+            - Week 1/routes/**
     pull_request:
         branches:
             - master
@@ -19,4 +19,4 @@ jobs:
             - uses: actions/checkout@v3
             - uses: ArtiomTr/jest-coverage-report-action@v2
               with:
-                working-directory: ./api
+                working-directory: ./routes
