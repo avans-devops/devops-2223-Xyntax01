@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Week 1/
 
     strategy:
       matrix:
@@ -26,6 +29,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: Week_1/package-lock.json
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
