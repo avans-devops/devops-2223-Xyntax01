@@ -1,4 +1,4 @@
-name: Okteto acceptence
+name: 3 Okteto acceptence
 
 on:
   pull_request:

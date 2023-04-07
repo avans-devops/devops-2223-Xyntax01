@@ -1,4 +1,4 @@
-name: Chai/Mocha Tests
+name: 2 Chai/Mocha Tests
 
 on:
   pull_request:
