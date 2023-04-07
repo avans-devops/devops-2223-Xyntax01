@@ -3,8 +3,8 @@ name: Chai/Mocha Tests
 on:
   pull_request:
     branches:
-      - develop
-      - main
+      - development
+      - master
 
 env:
   NODE_VERSION: 18
