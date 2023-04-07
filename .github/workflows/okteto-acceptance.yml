@@ -20,7 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: dev-previews-y-dewert
-           variables:
+          variables:
             API_GATEWAY_PORT=3000,
             AUTHSERVICE_URL=http://auth-service:3001/,
             PROFILESERVICE_URL=http://profile-service:3002/,
