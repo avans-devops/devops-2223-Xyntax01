@@ -50,4 +50,5 @@ export default ({ app }: TRoutesInput) => {
   app.delete("/:id/:participantId", passportMiddleware, (req, res) => {
     TargetController.deleteParticipantFromTarget(req, res);
   });
+  
 };
