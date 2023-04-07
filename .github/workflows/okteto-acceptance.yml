@@ -3,7 +3,7 @@ name: Okteto acceptence
 on:
   pull_request:
     branches:
-      - develop
+      - development
       - master
 
 jobs:
