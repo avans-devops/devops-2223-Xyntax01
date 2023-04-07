@@ -1,5 +1,5 @@
-# WEBS5
+# devops-2223-Xyntax01
+devops-2223-Xyntax01 created by GitHub Classroom
 
-docker-compose --env-file=./.env up --build -d
-
-![Architecture](./assets/architecture.jpg)
+![Coverage](https://github.com/avans-devops/devops-2223-Xyntax01/actions/workflows/jest-coverage.yml/badge.svg)
+![NodeJS](https://github.com/avans-devops/devops-2223-Xyntax01/actions/workflows/node.js.yml/badge.svg)
