@@ -2,6 +2,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts,.vue",
     "lint-and-fix": "eslint . --ext .ts,.vue --fix",
+    "pre-test": "(cd target-service && npm install) && (cd profile-service && npm install)",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register '**/src/test/**/*.ts'"
   },
   "devDependencies": {

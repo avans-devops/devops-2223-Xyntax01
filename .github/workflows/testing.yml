@@ -1,4 +1,4 @@
-name: ESLint
+name: Chai/Mocha Tests
 
 on:
   pull_request:
@@ -26,4 +26,5 @@ jobs:
         run: npm ci
 
       - name: Code tests
+        run: npm run pre-test
         run: npm run test
