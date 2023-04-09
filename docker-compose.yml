@@ -41,6 +41,8 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
+    ports:
+      - ${AUTH_SERVICE_PORT}:${AUTH_SERVICE_PORT}
     depends_on:
       rabbitmq-instance:
         condition: service_healthy
@@ -54,6 +56,8 @@ services:
       - API_SECRET=${API_SECRET}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
+    ports:
+      - ${PROFILE_SERVICE_PORT}:${PROFILE_SERVICE_PORT}
     depends_on:
       rabbitmq-instance:
         condition: service_healthy
@@ -71,6 +75,8 @@ services:
       - IMMAGA_INDEX=${IMMAGA_INDEX}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
+    ports:
+      - ${TARGET_SERVICE_PORT}:${TARGET_SERVICE_PORT}
     depends_on:
       rabbitmq-instance:
         condition: service_healthy
@@ -79,7 +85,9 @@ services:
     image: mongo:5.0.15
     volumes:
       - mongo-db-volume:/data/db
-  
+    ports:
+      - 27017:27017
+
   db-exporter:
     image: bitnami/mongodb-exporter:latest
     environment:
@@ -91,10 +99,12 @@ services:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
     depends_on:
       rabbitmq-instance:
         condition: service_healthy
-  
+
   grafana:
     build: ./grafana
     ports:
