@@ -15,7 +15,9 @@ services:
     environment:
       - RABBIT_URL=http://rabbitmq-instance:15672
       - PUBLISH_PORT=3005
-    depends_on: rabbitmq-instance
+    depends_on:
+      rabbitmq-instance:
+        condition: service_healthy
 
   api-gateway:
     container_name: api-gateway
@@ -39,7 +41,9 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
-    depends_on: rabbitmq-instance
+    depends_on:
+      rabbitmq-instance:
+        condition: service_healthy
 
   profile-service:
     container_name: profile-service
@@ -50,7 +54,9 @@ services:
       - API_SECRET=${API_SECRET}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
-    depends_on: rabbitmq-instance
+    depends_on:
+      rabbitmq-instance:
+        condition: service_healthy
 
   target-service:
     container_name: target-service
@@ -65,7 +71,9 @@ services:
       - IMMAGA_INDEX=${IMMAGA_INDEX}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
-    depends_on: rabbitmq-instance
+    depends_on:
+      rabbitmq-instance:
+        condition: service_healthy
 
   mongo-db-instance:
     image: mongo:5.0.15
@@ -83,7 +91,9 @@ services:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
-    depends_on: rabbitmq-instance
+    depends_on:
+      rabbitmq-instance:
+        condition: service_healthy
 
   grafana:
     build: ./grafana
