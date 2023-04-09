@@ -34,14 +34,14 @@ jobs:
             TARGET_SERVICE_MONGO_URL=mongodb://mongo-db-instance:27017/target-service,
             TARGET_SERVICE_PORT=3004,
 
-            JWT_SECRET=${{ secrets.JWT_SECRET }},
-            API_SECRET=${{ secrets.API_SECRET }},
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            API_SECRET=${{ secrets.API_SECRET }}
 
             RABBIT_URL=amqp://rabbitmq-instance:5672,
             RABBIT_EXCHANGE=WEBS5,
 
-            IMMAGA_API_KEY=${{ secrets.IMMAGA_API_KEY }},
-            IMMAGA_API_SECRET=${{ secrets.IMMAGA_API_SECRET }},
+            IMMAGA_API_KEY=${{ secrets.IMMAGA_API_KEY }}
+            IMMAGA_API_SECRET=${{ secrets.IMMAGA_API_SECRET }}
             IMMAGA_API_URL=https://api.imagga.com/v2,
             IMMAGA_INDEX=simularity_index_test,
           timeout: 15m
