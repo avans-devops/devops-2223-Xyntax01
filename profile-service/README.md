@@ -1,6 +1,6 @@
-# devops-2223-Xyntax01
+# devops-2223-Xyntax01/Yvan de Wert
 
-devops-2223-Xyntax01 created by GitHub Classroom
+devops-2223-Xyntax01/Yvan de Wert created by GitHub Classroom
 
 [![ESLint](https://github.com/avans-devops/devops-2223-Xyntax01/actions/workflows/linting.yml/badge.svg)](https://github.com/avans-devops/devops-2223-Xyntax01/actions/workflows/linting.yml)
 
