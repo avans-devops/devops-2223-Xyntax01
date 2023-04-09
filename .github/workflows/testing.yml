@@ -11,7 +11,7 @@ env:
 
 jobs:
   linting:
-    name: Linting
+    name: Mocha Chai Test
     runs-on: ubuntu-latest
     steps:
       - name: Install NodeJS
