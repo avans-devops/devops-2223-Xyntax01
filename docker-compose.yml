@@ -41,9 +41,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - RABBIT_URL=${RABBIT_URL}
       - RABBIT_EXCHANGE=${RABBIT_EXCHANGE}
-    depends_on:
-      rabbitmq-instance:
-        condition: service_healthy
+    depends_on: rabbitmq-instance
 
   profile-service:
     container_name: profile-service
@@ -79,7 +77,7 @@ services:
     image: mongo:5.0.15
     volumes:
       - mongo-db-volume:/data/db
-  
+
   db-exporter:
     image: bitnami/mongodb-exporter:latest
     environment:
@@ -94,7 +92,7 @@ services:
     depends_on:
       rabbitmq-instance:
         condition: service_healthy
-  
+
   grafana:
     build: ./grafana
     ports:
