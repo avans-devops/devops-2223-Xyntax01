@@ -1,4 +1,5 @@
 import passport from 'passport';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const localStrategy = require('passport-local').Strategy
 import userModel from '../models/user.model';
 import passportJWT from "passport-jwt";
@@ -33,8 +34,8 @@ passport.use(
       },
       async (email:string, password:string, done:any) => {
         try {
-          const user = await userModel.create({ email, password });
-          await publishUser({_id: user._id.toString(), email: user.email});
+          const user = await userModel.create({ email:email, password:password, roles: ["gebruiker"] });
+          await publishUser({_id: user._id.toString(), email: user.email, roles: user.roles});
           return done(null, user);
         } catch (error) {
           done(error);
@@ -53,8 +54,7 @@ passport.use(
       async (email:string, password:string, done:any) => {
         try {
           const user = await userModel.findOne({ email });
-  
-          if (!user) {
+          if (user === null) {
             return done(null, false, { message: 'User not found' });
           }
           
