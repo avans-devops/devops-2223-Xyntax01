@@ -10,7 +10,7 @@ build:
   #  - OKTETO_BUILD_API-GATEWAY_TAG: image tag
   api-gateway:
     context: api-gateway
-    dockerfile: api-gateway\Dockerfile
+    dockerfile: Dockerfile
 
   # You can use the following env vars to refer to this image in your deploy commands:
   #  - OKTETO_BUILD_AUTH-SERVICE_REGISTRY: image registry
@@ -19,7 +19,7 @@ build:
   #  - OKTETO_BUILD_AUTH-SERVICE_TAG: image tag
   auth-service:
     context: auth-service
-    dockerfile: auth-service\Dockerfile
+    dockerfile: Dockerfile
 
   # You can use the following env vars to refer to this image in your deploy commands:
   #  - OKTETO_BUILD_GRAFANA_REGISTRY: image registry
@@ -28,7 +28,7 @@ build:
   #  - OKTETO_BUILD_GRAFANA_TAG: image tag
   grafana:
     context: grafana
-    dockerfile: grafana\Dockerfile
+    dockerfile: Dockerfile
 
   # You can use the following env vars to refer to this image in your deploy commands:
   #  - OKTETO_BUILD_PROFILE-SERVICE_REGISTRY: image registry
@@ -37,7 +37,7 @@ build:
   #  - OKTETO_BUILD_PROFILE-SERVICE_TAG: image tag
   profile-service:
     context: profile-service
-    dockerfile: profile-service\Dockerfile
+    dockerfile: Dockerfile
 
   # You can use the following env vars to refer to this image in your deploy commands:
   #  - OKTETO_BUILD_PROMETHEUS_REGISTRY: image registry
@@ -56,7 +56,7 @@ build:
   #  - OKTETO_BUILD_TARGET-SERVICE_TAG: image tag
   target-service:
     context: target-service
-    dockerfile: target-service\Dockerfile
+    dockerfile: Dockerfile
 
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
