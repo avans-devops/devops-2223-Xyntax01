@@ -45,7 +45,6 @@ build:
   #  - OKTETO_BUILD_PROMETHEUS_IMAGE: image name
   #  - OKTETO_BUILD_PROMETHEUS_TAG: image tag
   prometheus:
-    context: prometheus
     image: prom/prometheus:latest
 
   # You can use the following env vars to refer to this image in your deploy commands:
@@ -62,6 +61,7 @@ build:
 deploy:
   compose:
     file: docker-compose.yml
+
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
 # dependencies:
