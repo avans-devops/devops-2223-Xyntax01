@@ -1,37 +1,39 @@
 export type TProfile = {
     _id: string;
     email: string;
+    roles: string[];
     targets: TTarget[]
 }
 
 export type TTarget = {
-    _id: String;
+    _id: string;
     user: TUser
     image: TImage;
     location: TLocation;
-    participants: TParticipant[];
+    participant: TParticipant[];
     created_at: Date;
 }
 
 export type TUser = {
     _id: string;
-    email: string
+    email: string;
+    roles: string[];
 }
 
 export type TImage = {
-    _id: String;
+    _id: string;
     data: Buffer;
     immagaId: string;
 }
 
 export type TLocation = {
-    _id: String;
+    _id: string;
     long: number;
     lat: number
 }
 
 export type TParticipant = {
-    _id: String;
+    _id: string;
     user: TUser;
     email: string;
     image: TImage;
