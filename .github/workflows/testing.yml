@@ -11,7 +11,7 @@ env:
 
 jobs:
   linting:
-    name: Linting
+    name: Mocha Chai Test
     runs-on: ubuntu-latest
     steps:
       - name: Install NodeJS
@@ -25,6 +25,10 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Code tests
+      - name: Install Test Dependencies
         run: npm run pre-test
+
+      - name: Code tests
         run: npm run test
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
