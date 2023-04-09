@@ -1,0 +1,152 @@
+name: devops-2223-xyntax01
+
+# The build section defines how to build the images of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#build
+build:
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_API-GATEWAY_REGISTRY: image registry
+  #  - OKTETO_BUILD_API-GATEWAY_REPOSITORY: image repo
+  #  - OKTETO_BUILD_API-GATEWAY_IMAGE: image name
+  #  - OKTETO_BUILD_API-GATEWAY_TAG: image tag
+  api-gateway:
+    context: api-gateway
+    dockerfile: api-gateway\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_AUTH-SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_AUTH-SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_AUTH-SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_AUTH-SERVICE_TAG: image tag
+  auth-service:
+    context: auth-service
+    dockerfile: auth-service\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_GRAFANA_REGISTRY: image registry
+  #  - OKTETO_BUILD_GRAFANA_REPOSITORY: image repo
+  #  - OKTETO_BUILD_GRAFANA_IMAGE: image name
+  #  - OKTETO_BUILD_GRAFANA_TAG: image tag
+  grafana:
+    context: grafana
+    dockerfile: grafana\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_PROFILE-SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_PROFILE-SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_PROFILE-SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_PROFILE-SERVICE_TAG: image tag
+  profile-service:
+    context: profile-service
+    dockerfile: profile-service\Dockerfile
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_PROMETHEUS_REGISTRY: image registry
+  #  - OKTETO_BUILD_PROMETHEUS_REPOSITORY: image repo
+  #  - OKTETO_BUILD_PROMETHEUS_IMAGE: image name
+  #  - OKTETO_BUILD_PROMETHEUS_TAG: image tag
+  prometheus: ""
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_TARGET-SERVICE_REGISTRY: image registry
+  #  - OKTETO_BUILD_TARGET-SERVICE_REPOSITORY: image repo
+  #  - OKTETO_BUILD_TARGET-SERVICE_IMAGE: image name
+  #  - OKTETO_BUILD_TARGET-SERVICE_TAG: image tag
+  target-service:
+    context: target-service
+    dockerfile: target-service\Dockerfile
+
+# The deploy section defines how to deploy your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#deploy
+deploy:
+  compose:
+    file: docker-compose.yml
+
+# The dependencies section defines other git repositories to be deployed as part of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#dependencies
+# dependencies:
+#   - https://github.com/okteto/sample
+
+
+# The dev section defines how to activate a development container
+# More info: https://www.okteto.com/docs/reference/manifest/#dev
+dev:
+  api-gateway:
+    command: bash
+    workdir: /app
+    sync:
+      - api-gateway:/app
+    forward:
+      - 9229:9229
+      - 3001:3001
+      - 3002:3001
+  auth-service:
+    command: bash
+    workdir: /app
+    sync:
+      - auth-service:/app
+    forward:
+      - 9229:9229
+  db-exporter:
+    command: bash
+    workdir: /opt/bitnami/mongodb-exporter
+    securityContext:
+      runAsUser: 1001
+    sync:
+      - .:/opt/bitnami/mongodb-exporter
+    forward:
+      - 9229:9229
+      - 9216:9216
+  grafana:
+    command: bash
+    workdir: /usr/share/grafana
+    securityContext:
+      runAsUser: 472
+    sync:
+      - grafana:/usr/share/grafana
+    forward:
+      - 9229:9229
+      - 3000:3000
+  profile-service:
+    command: bash
+    workdir: /app
+    sync:
+      - profile-service:/app
+    forward:
+      - 9229:9229
+  prometheus:
+    image: prom/prometheus:latest
+    command:
+      - --web.enable-lifecycle
+      - --config.file=/etc/prometheus/prometheus.yml
+    sync:
+      - prometheus:/etc/prometheus
+  rabbitmq-exporter:
+    command: bash
+    workdir: /usr/src/app
+    sync:
+      - .:/usr/src/app
+    forward:
+      - 9229:9229
+      - 9419:9419
+  rabbitmq-instance:
+    command: bash
+    workdir: /usr/src/app
+    sync:
+      - .:/usr/src/app
+    forward:
+      - 9229:9229
+      - 5672:5672
+      - 25672:25672
+      - 15692:15692
+      - 15691:15691
+      - 5671:5671
+      - 4369:4369
+  target-service:
+    command: bash
+    workdir: /app
+    sync:
+      - target-service:/app
+    forward:
+      - 9229:9229
+
