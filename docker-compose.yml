@@ -22,15 +22,10 @@ services:
   api-gateway:
     container_name: api-gateway
     build: ./api-gateway
-    environment:
-      - PORT=${API_GATEWAY_PORT}
-      - AUTHSERVICE_URL=${AUTHSERVICE_URL}
-      - PROFILESERVICE_URL=${PROFILESERVICE_URL}
-      - TARGETSERVICE_URL=${TARGETSERVICE_URL}
-      - JWT_SECRET=${JWT_SECRET}
-      - API_SECRET=${API_SECRET}
+    env_file:
+      - .env
     ports:
-      - 8080:${API_GATEWAY_PORT}
+      - 8080:3001
 
   auth-service:
     container_name: auth-service

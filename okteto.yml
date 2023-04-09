@@ -3,7 +3,6 @@ name: devops-2223-xyntax01
 # The build section defines how to build the images of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#build
 build:
-
   # You can use the following env vars to refer to this image in your deploy commands:
   #  - OKTETO_BUILD_API-GATEWAY_REGISTRY: image registry
   #  - OKTETO_BUILD_API-GATEWAY_REPOSITORY: image repo
@@ -45,7 +44,10 @@ build:
   #  - OKTETO_BUILD_PROMETHEUS_REPOSITORY: image repo
   #  - OKTETO_BUILD_PROMETHEUS_IMAGE: image name
   #  - OKTETO_BUILD_PROMETHEUS_TAG: image tag
-  prometheus: ""
+  prometheus:
+    context: .
+    dockerfile: .
+    image: prom/prometheus:latest
 
   # You can use the following env vars to refer to this image in your deploy commands:
   #  - OKTETO_BUILD_TARGET-SERVICE_REGISTRY: image registry
@@ -61,59 +63,14 @@ build:
 deploy:
   compose:
     file: docker-compose.yml
-
 # The dependencies section defines other git repositories to be deployed as part of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#dependencies
 # dependencies:
 #   - https://github.com/okteto/sample
 
-
 # The dev section defines how to activate a development container
 # More info: https://www.okteto.com/docs/reference/manifest/#dev
 dev:
-  api-gateway:
-    command: bash
-    workdir: /app
-    sync:
-      - api-gateway:/app
-    forward:
-      - 9229:9229
-      - 3001:3001
-      - 3002:3001
-  auth-service:
-    command: bash
-    workdir: /app
-    sync:
-      - auth-service:/app
-    forward:
-      - 9229:9229
-  db-exporter:
-    command: bash
-    workdir: /opt/bitnami/mongodb-exporter
-    securityContext:
-      runAsUser: 1001
-    sync:
-      - .:/opt/bitnami/mongodb-exporter
-    forward:
-      - 9229:9229
-      - 9216:9216
-  grafana:
-    command: bash
-    workdir: /usr/share/grafana
-    securityContext:
-      runAsUser: 472
-    sync:
-      - grafana:/usr/share/grafana
-    forward:
-      - 9229:9229
-      - 3000:3000
-  profile-service:
-    command: bash
-    workdir: /app
-    sync:
-      - profile-service:/app
-    forward:
-      - 9229:9229
   prometheus:
     image: prom/prometheus:latest
     command:
@@ -121,32 +78,3 @@ dev:
       - --config.file=/etc/prometheus/prometheus.yml
     sync:
       - prometheus:/etc/prometheus
-  rabbitmq-exporter:
-    command: bash
-    workdir: /usr/src/app
-    sync:
-      - .:/usr/src/app
-    forward:
-      - 9229:9229
-      - 9419:9419
-  rabbitmq-instance:
-    command: bash
-    workdir: /usr/src/app
-    sync:
-      - .:/usr/src/app
-    forward:
-      - 9229:9229
-      - 5672:5672
-      - 25672:25672
-      - 15692:15692
-      - 15691:15691
-      - 5671:5671
-      - 4369:4369
-  target-service:
-    command: bash
-    workdir: /app
-    sync:
-      - target-service:/app
-    forward:
-      - 9229:9229
-
