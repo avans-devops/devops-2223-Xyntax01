@@ -45,8 +45,7 @@ build:
   #  - OKTETO_BUILD_PROMETHEUS_IMAGE: image name
   #  - OKTETO_BUILD_PROMETHEUS_TAG: image tag
   prometheus:
-    context: .
-    dockerfile: .
+    context: prometheus
     image: prom/prometheus:latest
 
   # You can use the following env vars to refer to this image in your deploy commands:
